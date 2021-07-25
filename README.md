@@ -81,7 +81,7 @@ We add the dependencies to the library in the dependencies section of our pom:
                     <dependency>
                         <groupId>org.renjin</groupId>
                         <artifactId>renjin-script-engine</artifactId>
-                        <version>${renjin.version}</version>
+                        <version>3.5-beta76</version>
                     </dependency>
                 </dependencies>
             </plugin>
