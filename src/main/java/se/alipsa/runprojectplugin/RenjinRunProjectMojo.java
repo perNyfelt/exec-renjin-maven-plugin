@@ -3,7 +3,6 @@ package se.alipsa.runprojectplugin;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
@@ -20,36 +19,37 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
  * Goal which runs Renjin script.
  */
 @Mojo(name = "runR",
-    defaultPhase = LifecyclePhase.TEST_COMPILE,
     requiresDependencyResolution = ResolutionScope.TEST,
     requiresProject = true
 )
 public class RenjinRunProjectMojo extends AbstractMojo {
 
+  private final Logger logger = LoggerFactory.getLogger(RenjinRunProjectMojo.class);
+
   @Parameter(name = "rfile", property = "runR.rfile", required = true)
   private File rfile;
 
-  @Parameter(name = "methodName", property = "runR.methodName", required = false)
-  private String methodName;
+  @Parameter(name = "runFunction", property = "runR.runFunction", required = false)
+  private String runFunction;
 
   @Parameter(name = "suppressHeader", property = "runR.suppressHeader", defaultValue = "false", required = false)
   private boolean suppressHeader;
 
-  @Parameter( defaultValue = "${project}", readonly = true )
+  @Parameter( defaultValue = "${project}", readonly = true, required = true)
   private MavenProject project;
 
-  private final Logger logger = LoggerFactory.getLogger(RenjinRunProjectMojo.class);
   private RenjinScriptEngineFactory factory;
   private Session session;
 
+  @Override
   public void execute() throws MojoExecutionException {
     if (!suppressHeader) {
       logger.info("");
@@ -70,7 +70,7 @@ public class RenjinRunProjectMojo extends AbstractMojo {
       throw new MojoExecutionException("rfile " + rfile.getAbsolutePath() + " does not exist, cannot continue");
     }
 
-    List<URL> runtimeUrls = new ArrayList<>();
+    Set<URL> runtimeUrls = new HashSet<>();
     try {
       // Add classpath from calling pom, i.e. compile + system + provided + runtime + test
       for (String element : project.getTestClasspathElements()) {
@@ -101,6 +101,9 @@ public class RenjinRunProjectMojo extends AbstractMojo {
     try {
       engine.getSession().setWorkingDirectory(sourceFile.getParentFile());
       engine.eval(sourceFile);
+      if (runFunction != null) {
+        engine.eval(runFunction);
+      }
     } catch (Exception e) {
       throw new MojoExecutionException("Failed to run rscript " + sourceFile.getAbsolutePath(), e);
     }
@@ -118,12 +121,12 @@ public class RenjinRunProjectMojo extends AbstractMojo {
     this.rfile = rfile;
   }
 
-  public String getMethodName() {
-    return methodName;
+  public String getRunFunction() {
+    return runFunction;
   }
 
-  public void setMethodName(String methodName) {
-    this.methodName = methodName;
+  public void setRunFunction(String runFunction) {
+    this.runFunction = runFunction;
   }
 
   public boolean isSuppressHeader() {
