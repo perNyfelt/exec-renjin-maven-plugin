@@ -1,7 +1,9 @@
 # exec-renjin-maven-plugin
 Run a Renjin R analysis project from maven
 
-This plugin can be used to run Renjin R code through maven.
+This plugin can be used to run Renjin R code through maven; a bit like you can you the 
+codehouse exec-mave-plugin to run executables and java programs.
+
 The nice thing about this is that dependencies are easy to handle and it becomes
 obvious exactly what kind of dependencies that is needed.
 
