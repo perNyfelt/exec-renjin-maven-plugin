@@ -64,7 +64,7 @@ We add the dependencies to the library in the dependencies section of our pom:
                     [INFO]                RENJIN PROJECT RUNNER
                     [INFO]                Renjin ver: 3.5-beta76
                     [INFO] --------------------------------------------------------
-                    ; optional, default to false -->
+                    ; optional, default to false (i.e. no suppression) -->
                     <suppressHeader>false</suppressHeader>
                 </configuration>
                 <executions>
