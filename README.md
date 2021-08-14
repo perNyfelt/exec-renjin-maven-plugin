@@ -13,7 +13,7 @@ with some other complex project (e.g. a spring-boot app).
 I also found it a useful way to run Renjin R when using the 
 AetherPackageLoader is not an option.
 
-Let's say we have the following R code that depends on the package se.alipsa_xmlr:
+Let's say we have the following R code that depends on the package se.alipsa:xmlr
 
 ```r
 library('se.alipsa:xmlr')
