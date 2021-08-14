@@ -117,3 +117,10 @@ We add the dependencies to the library in the dependencies section of our pom:
 [INFO] Finished at: 2021-07-25T17:14:26+02:00
 [INFO] ------------------------------------------------------------------------
 ```
+
+# Version history
+## 1.0.1
+- Set BLAS, LAPACK and ARPACK to the java implementations if absent from system properties
+
+## 1.0  
+- initial, working, version

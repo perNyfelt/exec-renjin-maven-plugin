@@ -59,6 +59,16 @@ public class RenjinRunProjectMojo extends AbstractMojo {
       logger.info("--------------------------------------------------------");
     }
 
+    if (System.getProperty("com.github.fommil.netlib.BLAS") == null) {
+      System.setProperty("com.github.fommil.netlib.BLAS", "com.github.fommil.netlib.F2jBLAS");
+    }
+    if (System.getProperty("com.github.fommil.netlib.LAPACK") == null) {
+      System.setProperty("com.github.fommil.netlib.LAPACK", "com.github.fommil.netlib.F2jLAPACK");
+    }
+    if (System.getProperty("com.github.fommil.netlib.ARPACK") == null) {
+      System.setProperty("com.github.fommil.netlib.ARPACK", "com.github.fommil.netlib.F2jARPACK");
+    }
+
     if (project == null) {
       throw new MojoExecutionException("MavenProject is null, cannot continue");
     }
