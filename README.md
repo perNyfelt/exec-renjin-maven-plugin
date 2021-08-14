@@ -51,7 +51,7 @@ We add the dependencies to the library in the dependencies section of our pom:
             <plugin>
                 <groupId>se.alipsa</groupId>
                 <artifactId>renjin-run-project-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.1</version>
                 <configuration>
                     <!-- the path to the r file to be executed; mandatory-->
                     <rfile>R/testProject.R</rfile>
@@ -95,13 +95,13 @@ We add the dependencies to the library in the dependencies section of our pom:
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] -----------< se.alipsa:test-renjin-run-project-maven-plugin >-----------
-[INFO] Building Test renjin-run-project-maven-plugin 1.0-SNAPSHOT
+[INFO] Building Test renjin-run-project-maven-plugin 1.0.1
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
 [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ test-renjin-run-project-maven-plugin ---
 [INFO] Deleting /home/per/project/renjin-run-project-maven-plugin/testProject/target
 [INFO] 
-[INFO] --- exec-renjin-maven-plugin:1.0.0:runR (default-cli) @ test-renjin-run-project-maven-plugin ---
+[INFO] --- exec-renjin-maven-plugin:1.0.1:runR (default-cli) @ test-renjin-run-project-maven-plugin ---
 [INFO] 
 [INFO] --------------------------------------------------------
 [INFO]                RENJIN PROJECT RUNNER
